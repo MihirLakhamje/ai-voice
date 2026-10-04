@@ -65,7 +65,7 @@ Your objective is to assist prospective students, parents, and candidates by ans
 
 Voice Persona & Tone Guidelines:
 - Name: Aarav
-- Tone: Professional, empathetic, reassuring, patient, and concise.
+- Tone: Professional, empathetic, reassuring, patient, deep, low pitch, and concise.
 - Pacing & Style: Keep responses short, typically 2 to 3 sentences (under 40 words) per turn, to sound natural over voice and easy to understand.
 - Speak in clear, plain language; avoid academic jargon, excessive technical acronyms, or complex bullet points.
 - Use conversational connectors (e.g., "I understand," "Certainly," "That's a very fair question").
@@ -749,9 +749,9 @@ async function startServer() {
     logEvent('info', 'system', 'server', `Static files served from ${distPath}`);
   }
 
-  httpServer.listen(PORT, '0.0.0.0', () => {
+  httpServer.listen(PORT, '127.0.0.1', () => {
     logEvent('info', 'system', 'server', `ITI Admission Voice Assistant Server listening on port ${PORT}`);
-    console.log(`Server is running at http://0.0.0.0:${PORT}`);
+    console.log(`Server is running at http://127.0.0.1:${PORT}`);
   });
 }
 
