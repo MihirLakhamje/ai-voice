@@ -79,6 +79,9 @@ export const LiveVoiceSession: React.FC<LiveVoiceSessionProps> = ({
     };
   }, []);
 
+  console.log('Secure:', window.isSecureContext);
+  console.log('MediaDevices:', navigator.mediaDevices);
+  console.log('getUserMedia:', navigator.mediaDevices?.getUserMedia);
   // --- Real-Time Live WebSocket Methods ---
   const startLiveSession = async () => {
     try {
@@ -86,13 +89,7 @@ export const LiveVoiceSession: React.FC<LiveVoiceSessionProps> = ({
       setLiveStatus('Requesting mic access...');
 
       const stream = await navigator.mediaDevices.getUserMedia({
-        audio: {
-          channelCount: 1,
-          sampleRate: 16000,
-          echoCancellation: true,
-          noiseSuppression: true,
-          autoGainControl: true,
-        },
+        audio: true,
       });
       mediaStreamRef.current = stream;
 
@@ -252,7 +249,7 @@ export const LiveVoiceSession: React.FC<LiveVoiceSessionProps> = ({
       mediaStreamRef.current = null;
     }
     if (inputAudioCtxRef.current && inputAudioCtxRef.current.state !== 'closed') {
-      inputAudioCtxRef.current.close().catch(() => {});
+      inputAudioCtxRef.current.close().catch(() => { });
       inputAudioCtxRef.current = null;
     }
     if (wsRef.current) {
@@ -418,11 +415,10 @@ export const LiveVoiceSession: React.FC<LiveVoiceSessionProps> = ({
                 if (isLiveActive) stopLiveSession();
                 setVoiceMode('live');
               }}
-              className={`px-3 py-1.5 rounded-md transition-all ${
-                voiceMode === 'live'
+              className={`px-3 py-1.5 rounded-md transition-all ${voiceMode === 'live'
                   ? 'bg-white text-blue-700 shadow-xs font-semibold'
                   : 'text-slate-600 hover:text-slate-900'
-              }`}
+                }`}
             >
               Real-Time Live Call (Gemini 3.8 Live)
             </button>
@@ -431,11 +427,10 @@ export const LiveVoiceSession: React.FC<LiveVoiceSessionProps> = ({
                 if (isLiveActive) stopLiveSession();
                 setVoiceMode('push-to-talk');
               }}
-              className={`px-3 py-1.5 rounded-md transition-all ${
-                voiceMode === 'push-to-talk'
+              className={`px-3 py-1.5 rounded-md transition-all ${voiceMode === 'push-to-talk'
                   ? 'bg-white text-blue-700 shadow-xs font-semibold'
                   : 'text-slate-600 hover:text-slate-900'
-              }`}
+                }`}
             >
               Push-to-Talk (Record & Respond)
             </button>
@@ -487,11 +482,10 @@ export const LiveVoiceSession: React.FC<LiveVoiceSessionProps> = ({
             {/* Visualizer / Call State Indicator */}
             <div className="relative mb-4">
               <div
-                className={`w-28 h-28 rounded-full flex items-center justify-center transition-all ${
-                  isLiveActive
+                className={`w-28 h-28 rounded-full flex items-center justify-center transition-all ${isLiveActive
                     ? 'bg-blue-50 border-4 border-blue-500 ring-8 ring-blue-100'
                     : 'bg-slate-100 border-4 border-slate-200'
-                }`}
+                  }`}
               >
                 {isLiveActive ? (
                   <div className="flex flex-col items-center">
@@ -542,11 +536,10 @@ export const LiveVoiceSession: React.FC<LiveVoiceSessionProps> = ({
                       setIsMuted(!isMuted);
                       liveAudioPlayerRef.current?.setMuted(!isMuted);
                     }}
-                    className={`inline-flex items-center px-4 py-2.5 rounded-lg text-xs font-medium border transition-colors ${
-                      isMuted
+                    className={`inline-flex items-center px-4 py-2.5 rounded-lg text-xs font-medium border transition-colors ${isMuted
                         ? 'bg-amber-50 text-amber-800 border-amber-300'
                         : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
-                    }`}
+                      }`}
                   >
                     {isMuted ? <MicOff className="w-4 h-4 mr-1.5 text-amber-600" /> : <Mic className="w-4 h-4 mr-1.5 text-slate-600" />}
                     {isMuted ? 'Muted' : 'Mute Mic'}
@@ -589,13 +582,12 @@ export const LiveVoiceSession: React.FC<LiveVoiceSessionProps> = ({
                 onTouchStart={startRecordingPtt}
                 onTouchEnd={stopRecordingPtt}
                 disabled={isProcessingPtt}
-                className={`w-24 h-24 rounded-full flex flex-col items-center justify-center transition-all ${
-                  isRecording
+                className={`w-24 h-24 rounded-full flex flex-col items-center justify-center transition-all ${isRecording
                     ? 'bg-rose-600 text-white shadow-lg ring-8 ring-rose-100 scale-105'
                     : isProcessingPtt
-                    ? 'bg-slate-200 text-slate-500 cursor-not-allowed'
-                    : 'bg-blue-600 text-white hover:bg-blue-700 shadow-md'
-                }`}
+                      ? 'bg-slate-200 text-slate-500 cursor-not-allowed'
+                      : 'bg-blue-600 text-white hover:bg-blue-700 shadow-md'
+                  }`}
                 title="Hold to speak, release to send"
               >
                 <Mic className={`w-8 h-8 ${isRecording ? 'animate-bounce' : ''}`} />
@@ -609,8 +601,8 @@ export const LiveVoiceSession: React.FC<LiveVoiceSessionProps> = ({
               {isRecording
                 ? 'Listening to your query... Release button to process.'
                 : isProcessingPtt
-                ? 'Aarav is analyzing your question and synthesizing audio response...'
-                : 'Click and hold (or tap and hold on mobile) to ask your ITI question.'}
+                  ? 'Aarav is analyzing your question and synthesizing audio response...'
+                  : 'Click and hold (or tap and hold on mobile) to ask your ITI question.'}
             </p>
 
             {/* Result Box */}
