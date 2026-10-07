@@ -219,8 +219,8 @@ function VoiceAgent({ error, setError }) {
                 </div>
             </div>
 
-            <main className="mx-auto mt-0 grid grid-cols-1 gap-10 p-10 sm:grid-cols-2">
-                <section className="overflow-hidden rounded-2xl border border-gray-700 bg-gray-900 shadow-2xl">
+            <main className="mx-auto mt-0 grid w-full max-w-6xl grid-cols-1 gap-5 px-4 py-6 sm:gap-8 sm:px-6 sm:py-8 lg:grid-cols-2">
+                <section className="rounded-2xl border border-gray-700 bg-gray-900 shadow-2xl">
                     <div className="flex min-h-96 flex-col items-center px-6 pt-7 pb-7 text-center sm:min-h-96 sm:pt-9">
                         <div className="mb-4 grid h-32 place-items-center">
                             <div className="relative grid size-32 place-items-center rounded-full bg-gray-400/10">
@@ -350,7 +350,7 @@ function VoiceAgent({ error, setError }) {
                 </section>
 
                 <section
-                    className="flex flex-col overflow-hidden rounded-2xl border border-gray-700 bg-gray-900 shadow-xl"
+                    className="flex flex-col rounded-2xl border border-gray-700 bg-gray-900 shadow-xl"
                     aria-labelledby="chat-heading"
                 >
                     <div className="flex items-center justify-between gap-3 border-b border-gray-700 px-4 py-3.5 sm:px-5 sm:py-4">
