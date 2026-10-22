@@ -402,25 +402,26 @@ function VoiceAgent({ error, setError }) {
                         aria-relevant="additions"
                     >
                         <div
-                            className="flex h-52 grow"
+                            className="flex h-52 flex-col gap-3 overflow-y-auto sm:h-56"
                             aria-live="polite"
                             aria-relevant="additions"
                         >
                             {chatMessages.length === 0 ? (
-                                <div className="flex flex-1 items-center justify-center gap-2 text-[11px] text-gray-500">
-                                    <span className="text-gray-300">
+                                <div className="flex flex-1 flex-col items-center justify-center gap-2 text-[11px] text-gray-500">
+                                    <div className="text-gray-300">
                                         <Icon
                                             name="sparkle"
                                             size={17}
                                         />
-                                    </span>
+                                    </div>
 
-                                    <span>
+                                    <div>
                                         Your conversation will appear here.
-                                    </span>
+                                    </div>
                                 </div>
                             ) : (
                                 chatMessages.map((message) => (
+                                
                                     <div
                                         className={`max-w-[92%] rounded-xl border px-3 py-2 sm:max-w-[82%] ${message.role === "user"
                                                 ? "self-end rounded-br-sm border-gray-900 bg-gray-950"
@@ -428,11 +429,11 @@ function VoiceAgent({ error, setError }) {
                                             }`}
                                         key={message.id}
                                     >
-                                        <span className="text-[9px] font-bold text-gray-300">
+                                        <div className="text-[9px] font-bold text-gray-300">
                                             {message.role === "assistant"
                                                 ? "Aural"
                                                 : "You"}
-                                        </span>
+                                        </div>
 
                                         <p className="mt-1 mb-0 whitespace-pre-wrap text-xs leading-relaxed text-gray-200 wrap-anywhere">
                                             {message.text}
